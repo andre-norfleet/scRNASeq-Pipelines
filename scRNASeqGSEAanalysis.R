@@ -7,6 +7,29 @@ library(enrichplot)
 library(ggplot2)
 
 
+CPT.markers1 <- FindMarkers(MK01PPCMCPcombined2, ident.1 = "MK01CPtr", ident.2 = NULL, only.pos = TRUE)
+head(CPT.markers1)
+library(clusterProfiler)
+library(enrichplot)
+library(ggplot2)
+library(huorganism, character.only = TRUE)
+orginal_gene_list4CPT <- CPT.markers1$avg_log2FC
+names(original_gene_list4CPT) <- row.names(CPT.markers1)
+original_gene_list4CPT <- CPT.markers1$avg_log2FC
+names(original_gene_list4CPT) <- row.names(CPT.markers1)
+gene_list4CPT <- na.omit(original_gene_list4CPT)
+gene_list4CPT <- sort(original_gene_list4CPT, decreasing = TRUE)
+gseCPT1 <- gseGO(geneList=gene_list4CPT,
+ont ="ALL",
+keyType = "SYMBOL",
+nPerm = 10000,
+minGSSize = 3,
+maxGSSize = 800,
+pvalueCutoff = 0.05,
+verbose = TRUE,
+OrgDb = huorganism,
+pAdjustMethod = "none")
+
 BiocManager::install(huorganism, character.only = TRUE)
 ids4PP2 <-bitr(names(original_gene_list4PP), fromType = "SYMBOL", toType = "ENTREZID", OrgDb=huorganism)
 dedup_ids4PP2 = ids[!duplicated(ids4PP2[c("ENSEMBL")]),]
