@@ -6,6 +6,7 @@ library(ggplot2)
 library(pathview)
 
 # identify idents in merged object
+load("Z:/Andre/mergefinprocessed1.RData")
 table(mergefin$orig.ident)
 
 # find markers
@@ -25,4 +26,4 @@ gseCMU1 <- gseGO(geneList=gene_list4CMU,
 +                  OrgDb = huorganism,
 +                  pAdjustMethod = "none")
 require(DOSE)
-dotplot(gse, showCategory=10, split=".sign") + facet_grid(.~.sign)
+dotplot(gseCMU1, showCategory=10, split=".sign") + facet_grid(.~.sign)
