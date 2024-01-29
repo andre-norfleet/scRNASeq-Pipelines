@@ -13,6 +13,7 @@ import csv
 from scipy.sparse import csr_matrix
 import gzip
 
+# Load CellRanger expression matrix
 def main():
 	parser=argparse.ArgumentParser(description="convert 10x genomics mtx.matrix, barcodes.csv, and genes.tsv to a tab expression file that scdiff2 accepts")
 	parser._action_groups.pop()

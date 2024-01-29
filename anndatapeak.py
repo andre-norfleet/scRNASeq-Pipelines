@@ -7,6 +7,7 @@ import argparse
 import matplotlib
 matplotlib.use('Agg')
 
+# Load expression matrix
 fn = 'C:/Users/Andre/Downloads/PPUCMUCPT_out10224/PPUCMUCPTfiltered_feature_bc_matrix14.E.h5ad'
 #fn = 'C:/Users/Andre/Downloads/example_out1229/example.E.h5ad'
 
@@ -15,7 +16,11 @@ adata_orig.obs_names_make_unique()
 adata_orig.var_names_make_unique()
 #print(adata_orig)
 #var_names_make_unique()
+
+# Convert data type to 'int'
 adata_orig.obs['leiden'] = adata_orig.obs['leiden'].astype(int)
 print(adata_orig.obs.head())
 print(adata_orig.obs.dtypes)
+
+# Rewrite expression matrix
 adata_orig.write_h5ad('C:/Users/Andre/Downloads/PPUCMUCPT_out10224/PPUCMUCPTfiltered_feature_bc_matrix14_2.E.h5ad',compression=9)
